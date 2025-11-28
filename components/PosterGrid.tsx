@@ -1,16 +1,50 @@
+import React from "react";
+import { motion } from "framer-motion";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-
-// Using consistent seeds for demo
+// Enhanced data for better bento grid distribution
 const artworks = [
-  { id: 1, size: 'large', img: 'https://picsum.photos/seed/art1/600/800', title: 'Neon Dreams' },
-  { id: 2, size: 'small', img: 'https://picsum.photos/seed/art2/400/400', title: 'Abstract Void' },
-  { id: 3, size: 'tall', img: 'https://picsum.photos/seed/art3/400/800', title: 'Cyber Punk' },
-  { id: 4, size: 'small', img: 'https://picsum.photos/seed/art4/400/400', title: 'Chromatic' },
-  { id: 5, size: 'wide', img: 'https://picsum.photos/seed/art5/800/400', title: 'Typography' },
-  { id: 6, size: 'small', img: 'https://picsum.photos/seed/art6/400/400', title: 'Glitch' },
-  { id: 7, size: 'large', img: 'https://picsum.photos/seed/art7/600/800', title: 'Fluidity' },
+  {
+    id: 1,
+    size: "large",
+    img: "https://picsum.photos/seed/art1/800/800",
+    href: "#",
+  },
+  {
+    id: 2,
+    size: "small",
+    img: "https://picsum.photos/seed/art2/400/400",
+    href: "#",
+  },
+  {
+    id: 3,
+    size: "tall",
+    img: "https://picsum.photos/seed/art3/400/800",
+    href: "#",
+  },
+  {
+    id: 4,
+    size: "small",
+    img: "https://picsum.photos/seed/art4/400/400",
+    href: "#",
+  },
+  {
+    id: 5,
+    size: "wide",
+    img: "https://picsum.photos/seed/art5/800/400",
+    href: "#",
+  },
+  {
+    id: 6,
+    size: "small",
+    img: "https://picsum.photos/seed/art6/400/400",
+    href: "#",
+  },
+  {
+    id: 7,
+    size: "large",
+    img: "https://picsum.photos/seed/art7/800/800",
+    href: "#",
+  },
 ];
 
 const containerVariants = {
@@ -18,91 +52,116 @@ const containerVariants = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 20,
+    },
+  },
 };
 
 const PosterGrid: React.FC = () => {
   return (
-    <div className="py-24 bg-zinc-950/50">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+    <div className="py-32 bg-zinc-950 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(120,119,198,0.1),transparent_50%)]" />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-16 text-center"
+          transition={{ duration: 0.6 }}
+          className="mb-20 flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
-          <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            Visual Playground
-          </h2>
-          <p className="text-zinc-500 max-w-2xl mx-auto">
-            A collection of posters, 3D explorations, and graphic experiments.
-            Where structure meets chaos.
-          </p>
+          <div>
+            <h2 className="font-display text-5xl md:text-6xl font-bold mb-6 tracking-tight text-white">
+              Visual <span className="text-zinc-500">Playground</span>
+            </h2>
+            <p className="text-zinc-400 max-w-xl text-lg leading-relaxed">
+              A curated collection of digital explorations. Where structure
+              meets chaos and pixels find their purpose.
+            </p>
+          </div>
+          <div className="hidden md:block">
+            <div className="h-px w-32 bg-zinc-800 mb-4" />
+            <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest">
+              Selected Works 2023-2024
+            </p>
+          </div>
         </motion.div>
 
-        {/* Masonry/Bento Grid Layout */}
-        <motion.div 
+        {/* Bento Grid Layout */}
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-4 gap-6 auto-rows-[280px]"
         >
-          {artworks.map((art, i) => (
+          {artworks.map((art) => (
             <motion.div
               key={art.id}
+              layout
               variants={itemVariants}
-              whileHover={{ scale: 0.98, filter: "brightness(1.1)" }}
-              className={`relative group ${
-                art.size === 'large' ? 'col-span-2 row-span-2' :
-                art.size === 'tall' ? 'col-span-1 row-span-2' :
-                art.size === 'wide' ? 'col-span-2 row-span-1' :
-                'col-span-1 row-span-1'
+              className={`relative group rounded-none ${
+                art.size === "large"
+                  ? "md:col-span-2 md:row-span-2"
+                  : art.size === "tall"
+                  ? "md:col-span-1 md:row-span-2"
+                  : art.size === "wide"
+                  ? "md:col-span-2 md:row-span-1"
+                  : "md:col-span-1 md:row-span-1"
               }`}
             >
-              {/* Crosshairs - Positioned exactly at the corners, BEHIND the image (z-0) */}
+              <a href={art.href} className="block w-full h-full relative">
+                {/* Crosshairs - Preserved exactly as requested */}
                 {/* Top Left */}
-                <div className="absolute -top-1.5 -left-1.5 z-0 text-zinc-600 group-hover:text-indigo-500 transition-colors duration-300">
-                    <CrosshairIcon />
+                <div className="absolute -top-1.5 -left-1.5 z-20 text-zinc-700 group-hover:text-white transition-colors duration-300">
+                  <CrosshairIcon />
                 </div>
                 {/* Top Right */}
-                <div className="absolute -top-1.5 -right-1.5 z-0 text-zinc-600 group-hover:text-indigo-500 transition-colors duration-300">
-                    <CrosshairIcon />
+                <div className="absolute -top-1.5 -right-1.5 z-20 text-zinc-700 group-hover:text-white transition-colors duration-300">
+                  <CrosshairIcon />
                 </div>
                 {/* Bottom Left */}
-                <div className="absolute -bottom-1.5 -left-1.5 z-0 text-zinc-600 group-hover:text-indigo-500 transition-colors duration-300">
-                    <CrosshairIcon />
+                <div className="absolute -bottom-1.5 -left-1.5 z-20 text-zinc-700 group-hover:text-white transition-colors duration-300">
+                  <CrosshairIcon />
                 </div>
                 {/* Bottom Right */}
-                <div className="absolute -bottom-1.5 -right-1.5 z-0 text-zinc-600 group-hover:text-indigo-500 transition-colors duration-300">
-                    <CrosshairIcon />
+                <div className="absolute -bottom-1.5 -right-1.5 z-20 text-zinc-700 group-hover:text-white transition-colors duration-300">
+                  <CrosshairIcon />
                 </div>
 
-              {/* Inner Wrapper - Handles Masking and Border - z-10 */}
-              <div className="relative w-full h-full z-10 overflow-hidden bg-zinc-900 border border-zinc-800 group-hover:border-zinc-600 transition-colors">
-                  <img 
-                    src={art.img} 
-                    alt={art.title} 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                  />
-                  
-                  {/* Overlay Info */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <span className="font-display text-lg font-bold text-white translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      {art.title}
-                    </span>
-                    <span className="text-xs text-zinc-300 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                      Poster Series 0{i+1}
-                    </span>
+                {/* Card Content */}
+                <div className="relative w-full h-full z-10 overflow-hidden bg-zinc-900/50 border border-zinc-800/50 group-hover:border-zinc-500/50 transition-colors duration-500">
+                  {/* Image with Scale Effect */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    <motion.img
+                      src={art.img}
+                      alt={`Artwork ${art.id}`}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.6, ease: "easeOut" }}
+                      className="w-full h-full object-cover opacity-80 group-hover:opacity-100 grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500"
+                    />
                   </div>
-              </div>
+
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500" />
+                </div>
+              </a>
             </motion.div>
           ))}
         </motion.div>
@@ -112,9 +171,15 @@ const PosterGrid: React.FC = () => {
 };
 
 const CrosshairIcon = () => (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2V22M2 12H22" stroke="currentColor" strokeWidth="2" />
-    </svg>
+  <svg
+    width="12"
+    height="12"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 2V22M2 12H22" stroke="currentColor" strokeWidth="2" />
+  </svg>
 );
 
 export default PosterGrid;
