@@ -56,13 +56,13 @@ const Navbar: React.FC = () => {
         }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.35, ease: "easeInOut" }}
-        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 py-6 md:px-12 backdrop-blur-sm bg-black/20"
+        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-6 py-6 md:px-12 backdrop-blur-sm bg-black/20 will-change-transform"
       >
         {/* Advanced Kinetic Logo */}
         <a href="#" className="flex items-center gap-4 z-50 group">
           <div className="relative w-11 h-11 bg-zinc-950/50 backdrop-blur-md border border-white/10 rounded-xl flex items-center justify-center overflow-hidden shadow-2xl shadow-black/50 group-hover:border-indigo-500/30 transition-colors duration-500">
             {/* Background Gradient Bloom */}
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-600/20 via-purple-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out" />
+            <div className="absolute inset-0 bg-linear-to-br from-indigo-600/20 via-purple-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-out" />
 
             {/* The Mark */}
             <svg

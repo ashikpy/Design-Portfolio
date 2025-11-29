@@ -1,10 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code2, Palette, BookOpen, MousePointer2 } from "lucide-react";
+import LottieAnimation from "./LottieAnimation";
+import boundingBoxAnimation from "../assets/bounding-box-changing.json";
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative min-h-[100vh] w-full flex flex-col items-center justify-center overflow-hidden bg-transparent perspective-1000">
+    <div className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden bg-transparent perspective-1000">
       {/* 1. BACKGROUND GRID - Denser and less noticeable */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.07]">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -22,11 +24,6 @@ const Hero: React.FC = () => {
         </svg>
       </div>
 
-      {/* 2. BACKGROUND TRANSFORM ELEMENTS (Cinematic Drift) */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none select-none">
-        <BackgroundDesignElements />
-      </div>
-
       {/* 3. CONTRAST VIGNETTE - Improves readability */}
       <div className="absolute inset-0 z-10 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(5,5,5,0.8)_0%,rgba(5,5,5,0)_60%)]" />
 
@@ -39,9 +36,9 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="relative inline-flex group mb-4 md:mb-6"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-linear-to-r from-indigo-500 to-purple-500 rounded-full blur opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
           <div className="relative px-4 py-2 bg-black/60 backdrop-blur-xl border border-white/10 rounded-full overflow-hidden flex items-center gap-3 shadow-lg shadow-black/50">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] animate-[shimmer_2s_infinite]" />
+            <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_2s_infinite]" />
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
@@ -172,195 +169,5 @@ const ExpertiseItem = ({
     </span>
   </motion.div>
 );
-
-const BackgroundDesignElements = () => {
-  return (
-    <div className="w-full h-full relative opacity-80">
-      {/* Element 1: Large Wireframe Box (Top Right) */}
-      <motion.div
-        className="absolute top-[10%] right-[5%] md:right-[15%] w-[350px] h-[250px] border border-zinc-800 hidden md:block"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 1, 0],
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-      >
-        {/* Transform Handles */}
-        <div className="absolute -top-1.5 -left-1.5 w-2 h-2 bg-zinc-800" />
-        <div className="absolute -top-1.5 -right-1.5 w-2 h-2 bg-zinc-800" />
-        <div className="absolute -bottom-1.5 -left-1.5 w-2 h-2 bg-zinc-800" />
-        <div className="absolute -bottom-1.5 -right-1.5 w-2 h-2 bg-zinc-800" />
-      </motion.div>
-
-      {/* Element 5: Tall Narrow Box (Mid Left) */}
-      <motion.div
-        className="absolute top-[30%] left-[5%] w-[120px] h-[300px] border border-zinc-800/60 hidden md:block"
-        animate={{
-          y: [0, 15, 0],
-        }}
-        transition={{
-          duration: 18,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      >
-        <div className="absolute top-1/2 -left-1 w-2 h-2 bg-zinc-800/60" />
-        <div className="absolute top-1/2 -right-1 w-2 h-2 bg-zinc-800/60" />
-      </motion.div>
-
-      {/* Element 2: The "Active Selection" Box (Bottom Left) */}
-      <motion.div
-        className="absolute bottom-[15%] left-[5%] md:left-[10%] w-[280px] h-[320px] border border-indigo-500/20 shadow-[0_0_30px_rgba(99,102,241,0.02)]"
-        animate={{
-          y: [0, 30, 0],
-          x: [0, 10, 0],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      >
-        {/* Active Handles */}
-        <div className="absolute -top-1 -left-1 w-1.5 h-1.5 bg-indigo-500/50" />
-        <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-indigo-500/50" />
-        <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-indigo-500/50" />
-        <div className="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-indigo-500/50" />
-
-        {/* Center Pivot */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 rounded-full border border-indigo-500/30 flex items-center justify-center">
-          <div className="w-1 h-1 bg-indigo-500/50 rounded-full" />
-        </div>
-
-        {/* Dimension Label */}
-        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-zinc-900/80 px-2 py-1 rounded text-[9px] font-mono text-indigo-400/70 border border-white/5">
-          W: 280px H: 320px
-        </div>
-
-        {/* Fake Cursor */}
-        <motion.div
-          className="absolute -bottom-10 -right-10 text-indigo-400"
-          animate={{ x: [0, -20, 0], y: [0, -20, 0] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <MousePointer2 className="fill-black opacity-50" size={20} />
-        </motion.div>
-      </motion.div>
-
-      {/* Element 6: Wide Horizontal Box (Bottom Right) */}
-      <motion.div
-        className="absolute bottom-[20%] right-[10%] w-[400px] h-[100px] border border-zinc-800/50"
-        animate={{
-          y: [0, -25, 0],
-          x: [0, -10, 0],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 4,
-        }}
-      >
-        <div className="absolute -top-1 -left-1 w-1.5 h-1.5 bg-zinc-800" />
-        <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-zinc-800" />
-      </motion.div>
-
-      {/* Element 8: Top Left Wide Box (NEW) */}
-      <motion.div
-        className="absolute top-[15%] left-[5%] w-[300px] h-[80px] border border-zinc-800/40 hidden md:block"
-        animate={{
-          x: [0, 15, 0],
-          y: [0, 5, 0],
-        }}
-        transition={{
-          duration: 14,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 3,
-        }}
-      >
-        <div className="absolute -top-1 -left-1 w-1.5 h-1.5 bg-zinc-800/40" />
-        <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-zinc-800/40" />
-        <div className="absolute -bottom-1 -left-1 w-1.5 h-1.5 bg-zinc-800/40" />
-        <div className="absolute -bottom-1 -right-1 w-1.5 h-1.5 bg-zinc-800/40" />
-      </motion.div>
-
-      {/* Element 9: Bottom Center Small Box (NEW) */}
-      <motion.div
-        className="absolute bottom-[25%] left-[40%] w-[100px] h-[100px] border border-zinc-800/30"
-        animate={{
-          y: [0, -20, 0],
-          rotate: [0, 2, 0],
-        }}
-        transition={{
-          duration: 16,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-zinc-700/50 rounded-full" />
-      </motion.div>
-
-      {/* Element 10: Far Right Tall Box (NEW) */}
-      <motion.div
-        className="absolute top-[40%] right-[5%] w-[60px] h-[400px] border border-dashed border-zinc-800/30 hidden lg:block"
-        animate={{
-          y: [0, 40, 0],
-        }}
-        transition={{
-          duration: 22,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 5,
-        }}
-      />
-
-      {/* Element 11: Top Center Overlap (NEW) */}
-      <motion.div
-        className="absolute top-[5%] left-[45%] w-[400px] h-[200px] border border-zinc-800/20"
-        animate={{
-          x: [0, -30, 0],
-        }}
-        transition={{
-          duration: 19,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      >
-        <div className="absolute -top-1 left-1/2 w-1.5 h-1.5 bg-zinc-800/20" />
-        <div className="absolute -bottom-1 left-1/2 w-1.5 h-1.5 bg-zinc-800/20" />
-      </motion.div>
-
-      {/* Element 7: Tiny Floating Selection (Top Left Center) */}
-      <motion.div
-        className="absolute top-[25%] left-[25%] w-[60px] h-[60px] border border-dashed border-zinc-700/40"
-        animate={{
-          rotate: [0, 90],
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-      />
-
-      {/* Element 3: Floating Circle Area (Deep Background) */}
-      <motion.div
-        className="absolute top-[10%] left-[20%] w-[150px] h-[150px] border border-dashed border-zinc-800/30 rounded-full opacity-30"
-        animate={{
-          rotate: [0, 360],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-      />
-
-      {/* Element 4: Ruler Lines (Subtle) */}
-      <div className="absolute top-0 left-[10%] h-[30vh] w-[1px] bg-gradient-to-b from-zinc-800 to-transparent opacity-30" />
-      <div className="absolute top-[20%] right-0 w-[20vw] h-[1px] bg-gradient-to-r from-transparent to-zinc-800 opacity-30" />
-      <div className="absolute bottom-[10%] left-0 w-[15vw] h-[1px] bg-gradient-to-r from-transparent to-zinc-800 opacity-30" />
-    </div>
-  );
-};
 
 export default Hero;
