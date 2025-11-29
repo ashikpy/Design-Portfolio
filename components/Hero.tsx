@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Code2, Palette, BookOpen, MousePointer2 } from "lucide-react";
-import LottieAnimation from "./LottieAnimation";
-import boundingBoxAnimation from "../assets/bounding-box-changing.json";
 
 const Hero: React.FC = () => {
   return (
