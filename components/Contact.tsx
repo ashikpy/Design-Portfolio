@@ -6,7 +6,8 @@ const Contact: React.FC = () => {
   return (
     <footer className="relative bg-zinc-950 pt-24 pb-12 px-6 md:px-12 overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[1px] bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
+      {/* Background decoration */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-linear-to-r from-transparent via-zinc-700 to-transparent" />
 
       <div className="max-w-7xl mx-auto text-center relative z-10">
         <motion.div
@@ -23,10 +24,10 @@ const Contact: React.FC = () => {
 
           <a
             href="mailto:ashikofficial455@gmail.com"
-            className="inline-flex items-center gap-3 bg-white text-black px-8 py-4 rounded-full font-bold text-lg font-mono tracking-tight hover:bg-zinc-200 transition-colors duration-300 mb-16"
+            className="inline-flex items-center gap-3 bg-white text-black px-5 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-lg font-mono tracking-tight hover:bg-zinc-200 transition-colors duration-300 mb-16 max-w-full"
           >
-            <Mail className="w-5 h-5" />
-            ashikofficial455@gmail.com
+            <Mail className="w-5 h-5 shrink-0" />
+            <span className="break-all">ashikofficial455@gmail.com</span>
           </a>
         </motion.div>
 

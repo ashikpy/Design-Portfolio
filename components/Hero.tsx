@@ -53,13 +53,13 @@ const Hero: React.FC = () => {
             initial={{ opacity: 0, y: 20, letterSpacing: "-0.05em" }}
             animate={{ opacity: 1, y: 0, letterSpacing: "-0.02em" }}
             transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-[5rem] md:text-[9rem] lg:text-[11rem] leading-[0.85] font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-100 to-zinc-500 relative z-10 drop-shadow-2xl"
+            className="font-display text-[5rem] md:text-[9rem] lg:text-[11rem] leading-[0.85] font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-100 to-zinc-500 relative z-10 drop-shadow-lg md:drop-shadow-2xl will-change-transform"
           >
             ASHIK D.
           </motion.h1>
 
           {/* Glow backing for extra contrast */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-black/50 blur-[80px] rounded-full pointer-events-none -z-10" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-black/50 blur-3xl md:blur-[80px] rounded-full pointer-events-none -z-10" />
         </div>
 
         {/* Description - Aesthetic & Interactive */}
